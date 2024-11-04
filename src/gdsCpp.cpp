@@ -44,12 +44,18 @@ int gdsToText(const std::string &fileName)
     readBlk = new char[2];
     gdsFile.read(readBlk, 2);
 
+    // total record length in bytes (2 bytes max)
     sizeBlk = (((unsigned char)readBlk[0] << 8) | (unsigned char)readBlk[1]);
 
+    // reset to start of record
     gdsFile.seekg(-2, ios::cur);
+
+    // read entire record into readBlk
     readBlk = new char[sizeBlk];
     gdsFile.read(readBlk, sizeBlk);
 
+    // gds type is record type + data type
+    // https://boolean.klaasholwerda.nl/interface/bnf/gdsformat.html#recordheader
     hexKey = ((readBlk[2] << 8) | readBlk[3]);
 
     if (gdsRecordToText(readBlk)) {
