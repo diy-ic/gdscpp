@@ -22,6 +22,7 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+#include <cstdint>
 
 int GDSdistill(char *recIn, uint32_t &GDSKey, std::bitset<16> &bitarr,
                std::vector<int> &integer, std::vector<double> &B8Real,
